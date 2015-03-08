@@ -6,17 +6,30 @@ var myUser = {};
 // main divs
 var joinGameView = document.getElementById('join-game');
 var roleRevealView = document.getElementById('reveal-roles');
+var bigShowRoleButton = document.getElementById('btn-big-show-role');
 
-// join-game elements
+// joinGameView elements
 var nameButton = document.getElementById('btn-name');
 var nameField = document.getElementById('input-name');
 var startButton = document.getElementById('btn-start');
 var userList = document.getElementById('list-users');
 
+// roleRevealView elements
+var roleMessage = document.getElementById('role-message');
+var spyList = document.getElementById('list-spies');
+
 // initial state
 startButton.disabled = true;
+bigShowRoleButton.style.display = 'none';
 roleRevealView.style.display = 'none';
 
+// bigShowRoleButton
+bigShowRoleButton.onmousedown = function(){
+	roleRevealView.style.display = 'block';
+}
+bigShowRoleButton.onmouseup = function(){
+	roleRevealView.style.display = 'none';
+}
 
 // joinGameView
 nameField.onkeypress = function(e){
@@ -31,8 +44,7 @@ nameButton.onclick = function() {
 };
 startButton.onclick = function(){
 	socket.emit('start game');
-	joinGameView.style.display = 'none';
-	roleRevealView.style.display = 'block';
+	startButton.disabled = true;
 };
 
 
@@ -52,10 +64,21 @@ socket.on('allow game start', function(){
 
 socket.on('assign role', function(users){
 	users.forEach(function(user){
-		if(user.name == myName){
+		if(user.name == myUser.name){
 			myUser = user;
 		}
+		if(user.role == 'spy'){
+			var li = document.createElement('li');
+			li.className = 'list-group-item';
+			li.appendChild(document.createTextNode(user.name));
+			spyList.appendChild(li);
+		}
 	});
+	roleMessage.innerHTML = myUser.role.toUpperCase();
+	spyList.style.display = (myUser.role == 'spy') ? 'block' : 'none';
+
+	joinGameView.style.display = 'none';
+	bigShowRoleButton.style.display = 'block';
 });
 
 function submitName( name ){
