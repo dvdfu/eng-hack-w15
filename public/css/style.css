@@ -2,12 +2,21 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
-.container {
-	text-align: center;
+#game-info, #btn-propose-mission {
+	display: none;
 }
 
-.container > .row {
-	margin: 15px 0 0 0;
+.container {
+	text-align: center;
+	padding: 15px;
+}
+
+.row {
+	margin: 0 0 15px 0;
+}
+
+.row:last-child {
+	margin: 0;
 }
 
 .sub-container {
@@ -38,16 +47,10 @@ body {
 }
 
 #game-info {
-	display: none;
 	float: left;
 }
 
-.game-info-row {
-	width: 100%;
-	float: left;
-}
-
-.col-xs-6 {
+.col-xs-2, .col-xs-6, .col-xs-8 {
 	padding: 0;
 }
 
@@ -62,14 +65,16 @@ body {
 
 .user {
 	height: 40px;
+	transition: background-color 0.5s;
 }
 
 .user-self {
-	background-color: #acf;
+	color: #05f;
+	font-weight: bold;
 }
 
 .user-spy {
-	border: 1px solid red;
+	background-color: #acf;
 }
 
 .user-vote {

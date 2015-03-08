@@ -30,7 +30,7 @@ var playersOnMission = [];
 var consecutiveFailedProposals = 0;
 
 // mission variables
-var currentMission = 1;
+var currentMission = 0;
 var playersPerMission = [];
 
 // variables for counting how many users have done an action
@@ -74,35 +74,19 @@ function assignRoles() {
 }
 
 function initializeMissions(){
-	if(users.length === 5){
-		playersPerMission[1] = 2;
-		playersPerMission[2] = 3;
-		playersPerMission[3] = 2;
-		playersPerMission[4] = 3;
-		playersPerMission[5] = 3;
-	}else if(users.length === 6){
-		playersPerMission[1] = 2;
-		playersPerMission[2] = 3;
-		playersPerMission[3] = 3;
-		playersPerMission[4] = 3;
-		playersPerMission[5] = 4;
-	} else if(users.length === 7){
-		playersPerMission[1] = 2;
-		playersPerMission[2] = 3;
-		playersPerMission[3] = 3;
-		playersPerMission[4] = 4;
-		playersPerMission[5] = 4;
-	}else{
-		playersPerMission[1] = 3;
-		playersPerMission[2] = 4;
-		playersPerMission[3] = 4;
-		playersPerMission[4] = 5;
-		playersPerMission[5] = 5;
+	if (users.length === 5) {
+		playersPerMission = [ 2, 3, 2, 3, 3 ];
+	} else if (users.length === 6) {
+		playersPerMission = [ 2, 3, 3, 3, 4 ];
+	} else if (users.length === 7) {
+		playersPerMission = [ 2, 3, 3, 4, 4 ];
+	} else {
+		playersPerMission = [ 3, 4, 4, 5, 5 ];
 	}
 }
 
 function areTwoFailsRequired(){
-	return users.length > 6 && currentMission === 4;
+	return users.length > 6 && currentMission === 3;
 }
 
 function changeLeader(){
@@ -150,6 +134,7 @@ io.on('connection', function (socket) {
 
 	socket.on('mission proposed', function(usersOnMission){
 		playersOnMission = usersOnMission; // not used if vote fails
+		console.log(playersOnMission);
 		state = states.MISSION_VOTE;
 		io.emit('mission proposed', usersOnMission);
 	});

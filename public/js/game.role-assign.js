@@ -16,7 +16,8 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	$leaderView.find(".user-leader").html( '<i class="fa fa-star"></i>' ); // David pls change dis
 
 	if(me.name === leader.name){
-		options.innerHTML = '<button id="btn-propose-mission" type="button" class="btn btn-primary">Propose Mission</button>';
+		$proposeMissionButton.disabled = true;
+		$proposeMissionButton.style.display = 'inline';
 	}
 
 	$nameField.style.display = 'none';
@@ -28,6 +29,7 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 		if (user.name === me.name) {
 			me = user;
 			$me = $currentUser;
+			$me.addClass('user-self');
 		}
 		if (user.role === 'spy') {
 			$spies.push($currentUser);
@@ -38,7 +40,6 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 });
 
 function showRoles() {
-	$me.addClass('user-self');
 	if (me.role === 'spy') {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
@@ -47,7 +48,6 @@ function showRoles() {
 	setTimeout(hideRoles, 1000);
 
 	function hideRoles() {
-		$me.removeClass('user-self');
 		$spies.forEach(function ($spy) {
 			$spy.removeClass('user-spy');
 		});
