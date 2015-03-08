@@ -21,44 +21,38 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 		}
 	}
 	twoFailsMissionFour = _twoFailsMissionFour;
-
 	$twoFailsText.style.display = twoFailsMissionFour ? 'block' : 'none';
-
-
-	$missions.style.display = 'block';
-	$gameInfo.style.display = 'block';
-
-	setLeaderDisplay();
-
 	$nameField.style.display = 'none';
 	$startButton.style.display = 'none';
 	$gameInfo.style.display = 'block';
+	$missions.style.display = 'block';
 
-	users = _users;
-	_users.forEach(function (user) {
-		var $currentUser = getUserListItem(user);
-		if (user.name === me.name) {
-			me = user;
-			$me = $currentUser;
-			$me.addClass('user-self');
-		}
-		if (user.role === 'spy') {
-			$spies.push($currentUser);
-		}
+	setLeaderDisplay(function() {
+		users = _users;
+		_users.forEach(function (user) {
+			var $currentUser = getUserListItem(user);
+			if (user.name === me.name) {
+				me = user;
+				$me = $currentUser;
+				$me.addClass('user-self');
+			}
+			if (user.role === 'spy') {
+				$spies.push($currentUser);
+			}
+		});
+
+		showRoles();
 	});
-
-	showRoles();
 });
 
 function showRoles() {
-	var string = '\nAs this round\'s leader, select ' + playersPerMission[currentMission] + ' users by tapping them.';
 	if (me.role === 'spy') {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
 		});
-		showInstruction('You\'re a <b>spy</b>!' + (me.name === leader.name ? string : ''));
+		showInstruction('You\'re a <b>spy</b>!', true);
 	} else {
-		showInstruction('You\'re a <b>resistance member</b>!' + (me.name === leader.name ? string : ''));
+		showInstruction('You\'re a <b>resistance member</b>!', true);
 	}
 	setTimeout(hideRoles, 1000);
 

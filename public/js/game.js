@@ -49,15 +49,19 @@ function hideAllButtons(){
 	$succeedButton.style.display = 'none';
 }
 
-function showInstruction(text, textFadeout) {
+function showInstruction(text, revert) {
+	var previousText = $instructions.innerHTML;
 	$instructions.innerHTML = text;
 	$instructions.classList.add('highlight');
 	setTimeout(function() {
 		$instructions.classList.remove('highlight');
+		if (revert && previousText.length > 0) {
+			$instructions.innerHTML = previousText;
+		}
 	}, 1000);
 }
 
-function setLeaderDisplay(){
+function setLeaderDisplay(callback){
 	var $leaderView = getUserListItem(leader);
 	$leaderView.find(".user-leader").html('<i class="fa fa-star"></i>');
 
@@ -67,6 +71,8 @@ function setLeaderDisplay(){
 		inMissionProposal = true;
 		showInstruction('\nAs this round\'s leader, select ' + playersPerMission[currentMission] + ' users by tapping them.');
 	}
+
+	callback();
 }
 
 function getUserListItem(user){

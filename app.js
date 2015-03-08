@@ -14,14 +14,6 @@ var states = {
 	GAME_OVER: "GAME_OVER"
 }
 var state = states.USERS_JOINING;
-var colors = [
-	'#f00',
-	'#0f0',
-	'#00f',
-	'#ff0',
-	'#f0f',
-	'#0ff',
-];
 var users = [];
 var currId = 0;
 var leaderIndex;
@@ -105,7 +97,7 @@ io.on('connection', function (socket) {
 
 
 	socket.on('add user', function (name) {
-		if(users.length <= 10 && state === states.USERS_JOINING){
+		if(users.length < 10 && state === states.USERS_JOINING){
 			var user = new User(name);
 			users.push(user);
 			io.emit('users joined', [user]);
@@ -132,7 +124,7 @@ io.on('connection', function (socket) {
 		}
 	});
 
-	socket.on('mission proposed', function(usersOnMission){
+	socket.on('mission proposed', function (usersOnMission){
 		playersOnMission = usersOnMission; // not used if vote fails
 		console.log(playersOnMission);
 		state = states.MISSION_VOTE;
@@ -140,7 +132,7 @@ io.on('connection', function (socket) {
 		io.emit('mission proposed', usersOnMission);
 	});
 
-	socket.on('sent proposal vote', function(user, userAgrees){
+	socket.on('sent proposal vote', function (user, userAgrees){
 		proposalVotes[user.id] = userAgrees;
 		if(Object.keys(proposalVotes).length === users.length){
 			console.log(users);
@@ -151,13 +143,13 @@ io.on('connection', function (socket) {
 				else net--;
 			});
 
-			if(net > 0){
+			if (net > 0) {
 				// mission passes and mission vote begins
 				state = states.MISSION_VOTE;
 				consecutiveFailedProposals = 0;
 				console.log(proposalVotes);
 				io.emit('proposal passed', proposalVotes, playersOnMission, consecutiveFailedProposals);
-			}else{
+			} else {
 				console.log("Proposal failed!");
 				// mission fails and leader changes
 				state = states.PROPOSE_MISSION;
@@ -167,7 +159,7 @@ io.on('connection', function (socket) {
 				if(consecutiveFailedProposals >= 5){
 					// resistanceWins: false, successVotes: null, failVotes: null
 					io.emit('game over', false, null, null);
-				}else{
+				} else {
 					io.emit('proposal rejected', proposalVotes, users[leaderIndex], consecutiveFailedProposals);
 				}
 			}
@@ -176,11 +168,11 @@ io.on('connection', function (socket) {
 		}
 	});
 
-	socket.on('sent mission vote', function(user, missionSuccess){
+	socket.on('sent mission vote', function (user, missionSuccess) {
 		playersOnMission.length = 0;
-		if(missionSuccess){
+		if (missionSuccess) {
 			missionSuccessVotes++;
-		}else{
+		} else {
 			missionFailVotes++;
 		}
 
