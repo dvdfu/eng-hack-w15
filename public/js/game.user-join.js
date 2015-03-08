@@ -35,7 +35,9 @@ socket.on('users joined', function (_users) {
 
 		var $li = document.createElement('li');
 		$li.className = 'list-group-item user';
-		$li.innerHTML = user.name;
+		$li.innerHTML = '<div class="user-leader"></div>' + 
+			'<div class="user-name">' + user.name + '</div>' +
+			'<div class="user-vote"></div>';
 		$li.click(function() {
 
 		});
