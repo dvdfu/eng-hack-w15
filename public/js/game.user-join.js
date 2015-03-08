@@ -43,7 +43,7 @@ socket.on('users joined', function (_users) {
 				$li.classList.remove("selected");
 				var index = selectedUsers.indexOf(user);
 				selectedUsers.splice(index, 1);
-			}else if(selectedUsers.length <= playersPerMission[currentMission]){
+			}else if(selectedUsers.length < playersPerMission[currentMission]){
 				$li.classList.add("selected");
 				selectedUsers.push(user);
 				if(selectedUsers.length === playersPerMission[currentMission]){

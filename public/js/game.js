@@ -5,7 +5,7 @@ var $me, $spies = [];
 
 // data to display
 var playersPerMission = [];
-var currentMission = 1;
+var currentMission = 0;
 var consecutiveFailedProposals = 0;
 var twoFailsMissionFour;
 var leader;
