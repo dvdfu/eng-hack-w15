@@ -136,7 +136,8 @@ io.on('connection', function (socket) {
 		if (state === states.USERS_JOINING && users.length >= 1) {
 			assignRoles();
 			state = states.PROPOSE_MISSION;
-			leaderIndex = Math.floor(Math.random() * users.length);
+			leaderIndex = 4; // TEST CODE
+			// leaderIndex = Math.floor(Math.random() * users.length);
 			console.log(users[leaderIndex].name + ' is the initial leader');
 			initializeMissions();
 			io.emit('start game',
@@ -150,6 +151,7 @@ io.on('connection', function (socket) {
 
 	socket.on('mission proposed', function(usersOnMission){
 		playersOnMission = usersOnMission; // not used if vote fails
+		console.log(playersOnMission);
 		state = states.MISSION_VOTE;
 		io.emit('mission proposed', usersOnMission);
 	});

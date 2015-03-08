@@ -16,7 +16,8 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	$leaderView.find(".user-leader").html( '<i class="fa fa-star"></i>' ); // David pls change dis
 
 	if(me.name === leader.name){
-		options.innerHTML = '<button id="btn-propose-mission" type="button" class="btn btn-primary">Propose Mission</button>';
+		$proposeMissionButton.disabled = true;
+		$proposeMissionButton.style.display = 'inline';
 	}
 
 	$nameField.style.display = 'none';
