@@ -32,6 +32,10 @@ var $proposeMissionButton = document.getElementById('btn-propose-mission');
 
 var $instructions = document.getElementById('instructions');
 
+$gameInProgress.onclick = function () {
+	socket.emit('reset game');
+};
+
 function missionReset(){
 	inMissionProposal = false;
 	$('.user-leader').empty();
@@ -97,7 +101,5 @@ socket.on('state', function(state){
 });
 
 socket.on('refresh view', function() {
-	$gameInProgress.style.display = 'none';
-	$gameFinish.style.display = 'none';
-	$mainPage.style.display = 'block';
+	window.location.reload();
 });
