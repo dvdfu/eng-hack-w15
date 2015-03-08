@@ -74,3 +74,8 @@ function hideAllVotes(){
 	$('.user-vote').removeClass('accepted');
 	$('.user-vote').removeClass('rejected');
 }
+
+function setProposalFails(count) {
+	consecutiveFailedProposals = count;
+	$failedProposals.innerHTML = 'Failed votes: <b>' + consecutiveFailedProposals + '/5</b>';
+}
