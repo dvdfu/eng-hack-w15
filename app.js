@@ -157,7 +157,7 @@ io.on('connection', function (socket) {
 				state = states.MISSION_VOTE;
 				consecutiveFailedProposals = 0;
 				console.log(proposalVotes);
-				io.emit('proposal passed', proposalVotes, playersOnMission);
+				io.emit('proposal passed', proposalVotes, playersOnMission, consecutiveFailedProposals);
 			}else{
 				console.log("Proposal failed!");
 				// mission fails and leader changes

@@ -34,6 +34,18 @@ body {
 	margin: 0 0 10px 0;
 }
 
+.current-mission {
+	background-color:  #ff0 !important;
+}
+
+.failed-mission {
+	background-color:  #f00 !important;
+}
+
+.passed-mission {
+	background-color:  #0f0 !important;
+}
+
 .mission {
 	float: left;
 	width: 50px;
@@ -53,6 +65,7 @@ body {
 
 #failed-proposals {
 	float: left;
+	padding-top: 7px;
 }
 
 #game-info {

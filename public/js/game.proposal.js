@@ -1,7 +1,6 @@
 function showVotes(proposalVotes){
 	for(var userId in proposalVotes){
 		$userListItem = $('.user:nth-child(' + (parseInt(userId) + 1) + ')');
-		console.log($userListItem);
 		$userRow = $userListItem.find('.row');
 		var $vote = $userRow.find('.user-vote');
 		if(proposalVotes[userId]){
@@ -36,7 +35,6 @@ socket.on('mission proposed', function(usersOnMission){
 	} else {
 		showInstruction('Vote on ' + leader.name + '\'s proposal!');
 	}
-	console.log(usersOnMission);
 	for (var i = 0; i < usersOnMission.length; i++) {
 		var $selected = getUserListItem(usersOnMission[i]);
 		if(!$selected.hasClass('selected')){
@@ -49,7 +47,8 @@ socket.on('mission proposed', function(usersOnMission){
 	$refuseButton.style.display = 'inline';
 });
 
-socket.on('proposal passed', function(proposalVotes, playersOnMission){
+socket.on('proposal passed', function(proposalVotes, playersOnMission, _consecutiveFailedProposals){
+	setProposalFails(_consecutiveFailedProposals);
 	showVotes(proposalVotes);
 	showInstruction('Proposal passed! The players chosen are now in the mission.');
 	hideAllButtons();
@@ -63,7 +62,7 @@ socket.on('proposal passed', function(proposalVotes, playersOnMission){
 });
 
 socket.on('proposal rejected', function(proposalVotes, newLeader, _consecutiveFailedProposals){
-	consecutiveFailedProposals = _consecutiveFailedProposals;
+	setProposalFails(_consecutiveFailedProposals);
 	missionReset();
 	leader = newLeader;
 	setLeaderDisplay();

@@ -7,9 +7,13 @@ $rolesButton.onclick = function() {
 socket.on('start game', function (_users, _leader, _playersPerMission, _twoFailsMissionFour) {
 	leader = _leader;
 	playersPerMission = _playersPerMission;
+	setProposalFails(0);
 	for (var i = 0; i < playersPerMission.length; i++) {
-		var mission = $('.mission:nth-child(' + (i + 1) + ')');
-		mission.html(playersPerMission[i]);
+		var $mission = $('.mission:nth-child(' + (i + 1) + ')');
+		$mission.html(playersPerMission[i]);
+		if (i === 0) {
+			$mission.addClass('current-mission');
+		}
 	}
 	twoFailsMissionFour = _twoFailsMissionFour;
 
@@ -42,6 +46,7 @@ function showRoles() {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
 		});
+		showInstruction('You\'re a spy!');
 	}
 	setTimeout(hideRoles, 1000);
 

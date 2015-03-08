@@ -78,6 +78,11 @@ function hideAllVotes(){
 	$('.user-vote').removeClass('rejected');
 }
 
+function setProposalFails(count) {
+	consecutiveFailedProposals = count;
+	$failedProposals.innerHTML = 'Failed votes: <b>' + consecutiveFailedProposals + '/5</b>';
+}
+
 socket.on('state', function(state){
 	if(state !== "USERS_JOINING"){
 		$mainPage.style.display = 'none';

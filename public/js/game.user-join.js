@@ -15,10 +15,16 @@ $nameField.onkeypress = function(e) {
 			if (name == user.name) nameTaken = true;
 		});
 
-		if (name.length > 1 && !nameTaken){
-			me.name = name;
-			socket.emit('add user', name);
-			$nameField.disabled = true;
+		if (name.length > 0){
+			if (!nameTaken) {
+				me.name = name;
+				socket.emit('add user', name);
+				$nameField.disabled = true;
+			} else {
+				showInstruction(name + ' has already been taken!');
+			}
+		} else {
+			showInstruction('Enter a name!');
 		}
 	}
 }
