@@ -76,7 +76,7 @@ function setLeaderDisplay(callback){
 		showInstruction('\nAs this round\'s leader, select ' + playersPerMission[currentMission] + ' users by tapping them.');
 	}
 
-	callback();
+	callback && callback();
 }
 
 function getUserListItem(user){
