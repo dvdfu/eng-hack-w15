@@ -8,14 +8,15 @@ body {
 
 .container {
 	text-align: center;
+	padding: 15px;
 }
 
-.container > .row {
-	margin: 15px 0 0 0;
+.row {
+	margin: 0 0 15px 0;
 }
 
-.btn {
-	box-shadow: 0 5px 0 #888;
+.row:last-child {
+	margin: 0;
 }
 
 .sub-container {
@@ -48,12 +49,8 @@ body {
 #game-info {
 	float: left;
 }
-.game-info-row {
-	width: 100%;
-	float: left;
-}
 
-.col-xs-6 {
+.col-xs-2, .col-xs-6, .col-xs-8 {
 	padding: 0;
 }
 
@@ -62,13 +59,31 @@ body {
 	float: left;
 }
 
+#list-users {
+	margin-bottom: 0;
+}
+
 .user {
 	height: 40px;
+	transition: background-color 0.25s;
+}
+
+.user-self {
+	color: #05f;
+	font-weight: bold;
+}
+
+.user-spy {
+	background-color: #acf;
 }
 
 .user-vote {
 	height: 20px;
 	background-color: #8f8;
+}
+
+.user.selected {
+	background-color: #ddd;
 }
 
 .fa {
