@@ -1,5 +1,6 @@
 body {
 	font-family: 'Lato', sans-serif;
+	background-color: #222;
 }
 
 #game-info, #btn-propose-mission, #game-in-progress, #game-finish, #btn-vote-yes, #btn-vote-no, #btn-succeed, #btn-fail {
@@ -8,6 +9,14 @@ body {
 
 #game-finish li {
 	display: block;
+}
+
+#title {
+	color: #fff;
+}
+
+#title h2 {
+	font-weight: bold;
 }
 
 .container {
@@ -39,15 +48,15 @@ body {
 }
 
 .current-mission {
-	background-color:  #ff0 !important;
+	background-color: rgb(255, 187, 51) !important;
 }
 
 .failed-mission {
-	background-color:  #f00 !important;
+	background-color: rgb(255, 68, 85) !important;
 }
 
 .passed-mission {
-	background-color:  #0f0 !important;
+	background-color: #5cb85c !important;
 }
 
 .mission {
@@ -70,13 +79,14 @@ body {
 #failed-proposals {
 	float: left;
 	padding-top: 7px;
+	color: #fff;
 }
 
 #game-info {
 	float: left;
 }
 
-.col-xs-2, .col-xs-6, .col-xs-8 {
+.col-xs-2, .col-xs-5, .col-xs-6, .col-xs-8 {
 	padding: 0;
 }
 
@@ -96,19 +106,18 @@ body {
 }
 
 .user-spy {
-	background-color: #acf;
+	background-color: #acf !important;
 }
 
 .user-vote {
 	height: 20px;
-	background-color: #DDD;
 }
 
 .user-vote.accepted{
-	background-color: #8f8;
+	background-color: #5cb85c;
 }
 .user-vote.rejected{
-	background-color: #f00;
+	background-color: rgb(255, 68, 85);
 }
 
 .user.selected {
@@ -129,8 +138,13 @@ body {
 	padding: 10px 0;
 	transition: background-color 0.25s;
 	font-weight: bold;
+	color: #fff;
 }
 
 .highlight {
-	background-color: #ff0;
+	background-color: rgb(255, 187, 51);
+}
+
+.btn {
+	width: 100%;
 }

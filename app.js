@@ -144,15 +144,14 @@ io.on('connection', function (socket) {
 		proposalVotes[user.id] = userAgrees;
 		if(Object.keys(proposalVotes).length === users.length){
 			console.log(users);
-			var agreed = 0;
-			var reject = 0;
+			var net = 0;
 
 			proposalVotes.forEach(function (vote){
-				if(vote) agreed++;
-				else reject++;
+				if(vote) net++;
+				else net--;
 			});
 
-			if(agreed > reject){
+			if(net > 0){
 				// mission passes and mission vote begins
 				state = states.MISSION_VOTE;
 				consecutiveFailedProposals = 0;

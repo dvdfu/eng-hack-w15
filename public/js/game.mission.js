@@ -58,5 +58,5 @@ socket.on('game over', function(resistanceWins, missionSuccessVotes, missionFail
 
 	setTimeout(function () {
 		socket.emit('reset');
-	}, 8000);
+	}, 5000);
 });
