@@ -38,8 +38,6 @@ function missionReset(){
 	$('.user').removeClass('selected');
 	selectedUsers.length = 0;
 	hideAllButtons();
-
-	// TO DO: set top UI stuff
 }
 
 function hideAllButtons(){
@@ -90,4 +88,10 @@ socket.on('state', function(state){
 		$mainPage.style.display = 'none';
 		$gameInProgress.style.display = 'block';
 	}
+});
+
+socket.on('refresh view', function() {
+	$gameInProgress.style.display = 'none';
+	$gameFinish.style.display = 'none';
+	$mainPage.style.display = 'block';
 });

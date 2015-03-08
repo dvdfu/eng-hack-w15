@@ -133,7 +133,7 @@ body {
 
 #instructions {
 	border-radius: 4px;
-	padding: 10px 0;
+	padding: 10px;
 	transition: background-color 0.25s;
 	font-weight: bold;
 	color: #fff;

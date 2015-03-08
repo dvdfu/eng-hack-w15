@@ -224,6 +224,7 @@ io.on('connection', function (socket) {
 
 		pointsResistance = 0;
 		pointsSpy = 0;
+		socket.emit('refresh view');
 	});
 });
 
