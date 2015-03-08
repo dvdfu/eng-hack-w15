@@ -1,5 +1,5 @@
 var express = require('express');
-var app     = express();
+var app	= express();
 var http    = require('http').Server(app);
 var io      = require('socket.io')(http);
 
@@ -26,7 +26,29 @@ function User(name) {
 }
 
 function assignRoles() {
+	var numSpies = Math.floor((users.length - 1) / 3) + 1;
+	users = shuffle(users);
+	for (var i = 0; i < users.length; i++) {
+		if (i < numSpies) users[i].role = 'spy';
+		else users[i].role = 'resistance';
+	}
+
+	console.log(users);
+
+	function shuffle(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex ;
+		while (0 !== currentIndex) {
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+		}
+		return array;
+	}
 }
+
+
 
 
 
@@ -51,13 +73,13 @@ io.on('connection', function (socket) {
 		if (users.length >= 5) {
 			socket.emit('allow game start');
 		}
-		console.log(users);
+		console.log(name + ' joined the game');
 	});
 
 	socket.on('start game', function (user) {
 		if (state === states.USERS_JOINING && users.length >= 5) {
 			state = states.ROLE_ASSIGNMENT;
-
+			assignRoles();
 		}
 	});
 });
