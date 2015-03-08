@@ -137,10 +137,10 @@ io.on('connection', function (socket) {
 				twoFailsRequired = true;
 			}
 
-			io.emit('start game'
-					users[leaderIndex],
-					playersPerMission
-				);
+			io.emit('start game',
+				users[leaderIndex],
+				playersPerMission
+			);
 			rolesSeen = 0;
 		}
 	});
