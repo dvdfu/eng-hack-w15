@@ -206,12 +206,11 @@ io.on('connection', function (socket) {
 			missionFailVotes = 0;
 		}
 	});
-	
+
 	socket.on('reset', function(){
 		var state = states.USERS_JOINING;
 		var users = [];
 		var currId = 0;
-		var leaderIndex;
 		var proposalVotes = [];
 		var playersOnMission = [];
 		var consecutiveFailedProposals = 0;
