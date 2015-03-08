@@ -207,7 +207,24 @@ io.on('connection', function (socket) {
 		}
 	});
 	
-});
+	socket.on('reset', function(){
+		var state = states.USERS_JOINING;
+		var users = [];
+		var currId = 0;
+		var leaderIndex;
+		var proposalVotes = [];
+		var playersOnMission = [];
+		var consecutiveFailedProposals = 0;
+
+		var currentMission = 0;
+		var playersPerMission = [];
+
+		var missionSuccessVotes = 0;
+		var missionFailVotes = 0;
+
+		var pointsResistance = 0;
+		var pointsSpy = 0;
+	});
 
 http.listen(process.env.PORT || 3000, function () {
 	console.log('listening on *:3000');
