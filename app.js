@@ -206,24 +206,26 @@ io.on('connection', function (socket) {
 			missionFailVotes = 0;
 		}
 	});
+	
+	socket.on('reset game', function(){
+		state = states.USERS_JOINING;
+		users = [];
+		currId = 0;
+		proposalVotes = [];
+		playersOnMission = [];
+		consecutiveFailedProposals = 0;
 
-	socket.on('reset', function(){
-		var state = states.USERS_JOINING;
-		var users = [];
-		var currId = 0;
-		var proposalVotes = [];
-		var playersOnMission = [];
-		var consecutiveFailedProposals = 0;
+		currentMission = 0;
+		playersPerMission = [];
 
-		var currentMission = 0;
-		var playersPerMission = [];
+		missionSuccessVotes = 0;
+		missionFailVotes = 0;
 
-		var missionSuccessVotes = 0;
-		var missionFailVotes = 0;
-
-		var pointsResistance = 0;
-		var pointsSpy = 0;
+		pointsResistance = 0;
+		pointsSpy = 0;
+		socket.emit('refresh view');
 	});
+});
 
 http.listen(process.env.PORT || 3000, function () {
 	console.log('listening on *:3000');

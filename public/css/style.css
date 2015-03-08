@@ -106,11 +106,18 @@ body {
 }
 
 .user-spy {
-	background-color: #acf !important;
+	background-color: #fca !important;
 }
 
 .user-vote {
+	border-radius: 50%;
+	width: 20px;
 	height: 20px;
+	float: right;
+}
+
+.user-leader {
+	color: #fc0;
 }
 
 .user-vote.accepted{
@@ -124,18 +131,9 @@ body {
 	background-color: #ddd;
 }
 
-.fa {
-	width: 20px;
-	height: 20px;
-}
-
-.fa-star {
-	color: #fd0;
-}
-
 #instructions {
 	border-radius: 4px;
-	padding: 10px 0;
+	padding: 10px;
 	transition: background-color 0.25s;
 	font-weight: bold;
 	color: #fff;

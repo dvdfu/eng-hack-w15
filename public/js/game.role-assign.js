@@ -10,7 +10,11 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	setProposalFails(0);
 	for (var i = 0; i < playersPerMission.length; i++) {
 		var $mission = $('.mission:nth-child(' + (i + 1) + ')');
-		$mission.html(playersPerMission[i]);
+		var string = '' + playersPerMission[i];
+		if (i === 3 && _twoFailsMissionFour) {
+			string += '*';
+		}
+		$mission.html(string);
 		if (i === 0) {
 			$mission.addClass('current-mission');
 		}
@@ -43,13 +47,14 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 });
 
 function showRoles() {
+	var string = '\nAs this round\'s leader, select ' + playersPerMission[currentMission] + ' users by tapping them.';
 	if (me.role === 'spy') {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
 		});
-		showInstruction('You\'re a <b>spy</b>!');
+		showInstruction('You\'re a <b>spy</b>!' + (me.name === leader.name ? string : ''));
 	} else {
-		showInstruction('You\'re a <b>resistance member</b>!');
+		showInstruction('You\'re a <b>resistance member</b>!' + (me.name === leader.name ? string : ''));
 	}
 	setTimeout(hideRoles, 1000);
 

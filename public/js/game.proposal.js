@@ -50,7 +50,7 @@ socket.on('mission proposed', function(usersOnMission){
 socket.on('proposal passed', function(proposalVotes, playersOnMission, _consecutiveFailedProposals){
 	setProposalFails(_consecutiveFailedProposals);
 	showVotes(proposalVotes);
-	showInstruction('Proposal passed! The players chosen are now in the mission.');
+	showInstruction('Proposal passed!\nThe players chosen are now in the mission.');
 	hideAllButtons();
 	playersOnMission.forEach(function(player){
 		if(me.id === player.id){

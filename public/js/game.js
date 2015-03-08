@@ -38,8 +38,6 @@ function missionReset(){
 	$('.user').removeClass('selected');
 	selectedUsers.length = 0;
 	hideAllButtons();
-
-	// TO DO: set top UI stuff
 }
 
 function hideAllButtons(){
@@ -61,12 +59,13 @@ function showInstruction(text, textFadeout) {
 
 function setLeaderDisplay(){
 	var $leaderView = getUserListItem(leader);
-	$leaderView.find(".user-leader").html( '<i class="fa fa-star"></i>' ); // David pls change dis
+	$leaderView.find(".user-leader").html('&#9818;');
 
 	if(me.name === leader.name){
 		$proposeMissionButton.disabled = true;
 		$proposeMissionButton.style.display = 'inline';
 		inMissionProposal = true;
+		showInstruction('\nAs this round\'s leader, select ' + playersPerMission[currentMission] + ' users by tapping them.');
 	}
 }
 
@@ -89,4 +88,10 @@ socket.on('state', function(state){
 		$mainPage.style.display = 'none';
 		$gameInProgress.style.display = 'block';
 	}
+});
+
+socket.on('refresh view', function() {
+	$gameInProgress.style.display = 'none';
+	$gameFinish.style.display = 'none';
+	$mainPage.style.display = 'block';
 });

@@ -57,6 +57,6 @@ socket.on('game over', function(resistanceWins, missionSuccessVotes, missionFail
 	$gameFinish.innerHTML += '</ul>';
 
 	setTimeout(function () {
-		socket.emit('reset');
+		socket.emit('reset game');
 	}, 5000);
 });
