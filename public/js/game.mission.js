@@ -30,7 +30,7 @@ socket.on('mission end', function(failed, missionSuccessVotes, missionFailVotes,
 
 	leader = newLeader;
 	setLeaderDisplay();
-	showInstruction('The new leader is now ' + leader.name);
+	showInstruction('The new leader is now ' + leader.name + '.');
 	inMissionProposal = true;
 });
 

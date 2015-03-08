@@ -67,6 +67,6 @@ socket.on('proposal rejected', function(proposalVotes, newLeader, _consecutiveFa
 	leader = newLeader;
 	setLeaderDisplay();
 	showVotes(proposalVotes);
-	showInstruction('Proposal failed. The new leader is now ' + leader.name);
+	showInstruction('Proposal failed. The new leader is now ' + leader.name + '.');
 	inMissionProposal = true;
 });
