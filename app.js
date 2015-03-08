@@ -165,7 +165,7 @@ io.on('connection', function (socket) {
 				changeLeader();
 				consecutiveFailedProposals++;
 				console.log(proposalVotes);
-				if(consecutiveFailedProposals === 5){
+				if(consecutiveFailedProposals > 5){
 					// resistanceWins: false, successVotes: null, failVotes: null
 					io.emit('game over', false, null, null);
 				}else{
