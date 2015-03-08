@@ -1,0 +1,20 @@
+{
+  "name": "resistance",
+  "version": "0.0.0",
+  "description": "Eng Hack Winter 2015",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dvdfu/eng-hack-w15"
+  },
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.12.2"
+  },
+  "bugs": {
+    "url": "https://github.com/dvdfu/eng-hack-w15/issues"
+  },
+  "homepage": "https://github.com/dvdfu/eng-hack-w15",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC"
+}
