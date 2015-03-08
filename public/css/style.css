@@ -1,11 +1,27 @@
+body {
+	font-family: 'Lato', sans-serif;
+}
+
 .container {
 	text-align: center;
+}
+
+.container > .row {
+	margin: 15px 0 0 0;
+}
+
+.btn {
+	box-shadow: 0 5px 0 #888;
+}
+
+.sub-container {
+	margin-top: 15px;
 }
 
 #list-mission {
 	width: 100%;
 	height: 50px;
-	margin: 10px 0;
+	margin: 0 0 10px 0;
 }
 
 .mission {
@@ -14,7 +30,7 @@
 	height: 50px;
 	border-radius: 50px;
 	background-color: #888;
-	margin-right: 9px;
+	margin-right: 10px;
 }
 
 .mission:last-child {
@@ -25,16 +41,39 @@
 	float: left;
 }
 
-#btn-roles {
+#game-info {
+	display: none;
 	float: left;
 }
 
-.user-name {
-	width: 50%;
+.game-info-row {
+	width: 100%;
+	float: left;
+}
+
+.col-xs-6 {
+	padding: 0;
+}
+
+#btn-roles {
+	width: 100%;
+	float: left;
+}
+
+.user {
+	height: 40px;
 }
 
 .user-vote {
-	width: 20px;
 	height: 20px;
 	background-color: #8f8;
+}
+
+.fa {
+	width: 20px;
+	height: 20px;
+}
+
+.fa-star {
+	color: #fd0;
 }

@@ -9,8 +9,5 @@ var consecutiveFailedProposals = 0;
 var twoFailsMissionFour;
 var leader;
 
-var $missions = document.getElementById('list-mission');
-var $failedProposals= document.getElementById('failed-proposals');
-
-$missions.style.display = 'none';
-$failedProposals.style.display = 'none';
+var $failedProposals = document.getElementById('failed-proposals');
+var $gameInfo = document.getElementById('game-info');

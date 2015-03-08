@@ -1,5 +1,4 @@
 var $rolesButton = document.getElementById('btn-roles');
-$rolesButton.style.display = 'none';
 
 $rolesButton.onclick = function() {
 	// $me.
@@ -8,6 +7,7 @@ $rolesButton.onclick = function() {
 socket.on('assign role', function (_users) {
 	$nameField.style.display = 'none';
 	$startButton.style.display = 'none';
+	$gameInfo.style.display = 'block';
 	_users.forEach(function (user) {
 		var $currentUser = $('.user:nth-child(' + (user.id + 1) + ')');
 		if (user.name === me.name) {

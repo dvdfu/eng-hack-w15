@@ -120,7 +120,7 @@ io.on('connection', function (socket) {
 			var user = new User(name);
 			users.push(user);
 			io.emit('users joined', [user]);
-			if (users.length >= 5) {
+			if (users.length >= 1) {
 				io.emit('allow game start');
 			}
 			console.log(name + ' joined the game');
@@ -128,7 +128,7 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('request role', function (user) {
-		if (state === states.USERS_JOINING && users.length >= 5) {
+		if (state === states.USERS_JOINING && users.length >= 1) {
 			assignRoles();
 			io.emit('assign role', users);
 		}
