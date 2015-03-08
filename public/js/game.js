@@ -61,12 +61,13 @@ function showInstruction(text, textFadeout) {
 
 function setLeaderDisplay(){
 	var $leaderView = getUserListItem(leader);
-	$leaderView.find(".user-leader").html( '<i class="fa fa-star"></i>' ); // David pls change dis
+	$leaderView.find(".user-leader").html('&#9818;');
 
 	if(me.name === leader.name){
 		$proposeMissionButton.disabled = true;
 		$proposeMissionButton.style.display = 'inline';
 		inMissionProposal = true;
+		showInstruction('\nAs this round\'s leader, select ' + playersPerMission[currentMission] + ' users by tapping them.');
 	}
 }
 
