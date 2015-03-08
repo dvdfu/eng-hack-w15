@@ -10,12 +10,20 @@ nameButton.onclick = function() {
 	submitName(nameField.value);
 };
 
+startButton.onclick = function(){
+	socket.emit('start game');
+};
+
 socket.on('users joined', function (users) {
 	users.forEach(function (user) {
 		var li = document.createElement("li");
-		li.appendChild(document.createTextNode(user));
+		li.appendChild(document.createTextNode(user.name));
 		userList.appendChild(li);
 	});
+});
+
+socket.on('allow game start', function(){
+	startButton.disabled = false;
 });
 
 function submitName( name ){
@@ -25,8 +33,3 @@ function submitName( name ){
 		nameField.disabled = true;
 	}
 }
-
-socket.on('allow game start', function(){
-	startButton.disabled = false;
-})
-
