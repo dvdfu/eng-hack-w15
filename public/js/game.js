@@ -26,6 +26,8 @@ var $succeedButton = document.getElementById('btn-succeed');
 var $failButton = document.getElementById('btn-fail');
 var $proposeMissionButton = document.getElementById('btn-propose-mission');
 
+var $instructions = document.getElementById('instructions');
+
 function missionReset(){
 	inMissionProposal = false;
 	$('.user-leader').empty();
@@ -43,6 +45,14 @@ function hideAllButtons(){
 	$proposeMissionButton.style.display = 'none';
 	$failButton.style.display = 'none';
 	$succeedButton.style.display = 'none';
+}
+
+function showInstruction(text) {
+	$instructions.innerHTML = text;
+	$instructions.classList.add('highlight');
+	setTimeout(function() {
+		$instructions.classList.remove('highlight');
+	}, 1000);
 }
 
 function setLeaderDisplay(){

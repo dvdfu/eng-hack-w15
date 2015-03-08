@@ -55,5 +55,11 @@ socket.on('users joined', function (_users) {
 		};
 		$userList.appendChild($li);
 	});
-	$startButton.disabled = users.length < 1;
+	if (users.length < 5) {
+		$startButton.disabled = true;
+		showInstruction('Need ' + (5 - users.length) + ' more players to begin!');
+	} else {
+		$startButton.disabled = false;
+		showInstruction('Ready to play!');
+	}
 });

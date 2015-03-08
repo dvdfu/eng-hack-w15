@@ -7,6 +7,7 @@ body {
 }
 
 .container {
+	width: 320px;
 	text-align: center;
 	padding: 15px;
 }
@@ -23,6 +24,10 @@ body {
 	margin-top: 15px;
 }
 
+.list-group {
+	margin-bottom: 15px;
+}
+
 #list-mission {
 	width: 100%;
 	height: 50px;
@@ -36,6 +41,10 @@ body {
 	border-radius: 50px;
 	background-color: #888;
 	margin-right: 10px;
+	font-size: 30px;
+	font-weight: bold;
+	color: #fff;
+	padding-top: 3px;
 }
 
 .mission:last-child {
@@ -57,10 +66,6 @@ body {
 #btn-roles {
 	width: 100%;
 	float: left;
-}
-
-#list-users {
-	margin-bottom: 0;
 }
 
 .user {
@@ -93,4 +98,15 @@ body {
 
 .fa-star {
 	color: #fd0;
+}
+
+#instructions {
+	border-radius: 4px;
+	padding: 10px 0;
+	transition: background-color 0.25s;
+	font-weight: bold;
+}
+
+.highlight {
+	background-color: #ff0;
 }
