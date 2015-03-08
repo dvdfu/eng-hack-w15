@@ -10,6 +10,8 @@ var consecutiveFailedProposals = 0;
 var twoFailsMissionFour;
 var leader;
 
+var inMissionProposal = false;
+
 var selectedUsers = [];
 
 var $failedProposals = document.getElementById('failed-proposals');
@@ -25,6 +27,7 @@ var $failButton = document.getElementById('btn-fail');
 var $proposeMissionButton = document.getElementById('btn-propose-mission');
 
 function missionReset(){
+	inMissionProposal = false;
 	$('.user-leader').empty();
 	$('.user').removeClass('selected');
 	selectedUsers.length = 0;

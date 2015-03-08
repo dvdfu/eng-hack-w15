@@ -38,16 +38,18 @@ socket.on('users joined', function (_users) {
 			'<div class="col-xs-8 user-name">' + user.name + '</div>' +
 			'<div class="col-xs-2 user-vote"></div></div>';
 		$li.onclick = function() {
-			if($li.classList.contains('selected')){
-				$proposeMissionButton.disabled = true;
-				$li.classList.remove("selected");
-				var index = selectedUsers.indexOf(user);
-				selectedUsers.splice(index, 1);
-			}else if(selectedUsers.length < playersPerMission[currentMission]){
-				$li.classList.add("selected");
-				selectedUsers.push(user);
-				if(selectedUsers.length === playersPerMission[currentMission]){
-					$proposeMissionButton.disabled = false;
+			if(me.id === leader.id && inMissionProposal){
+				if($li.classList.contains('selected')){
+					$proposeMissionButton.disabled = true;
+					$li.classList.remove("selected");
+					var index = selectedUsers.indexOf(user);
+					selectedUsers.splice(index, 1);
+				}else if(selectedUsers.length < playersPerMission[currentMission]){
+					$li.classList.add("selected");
+					selectedUsers.push(user);
+					if(selectedUsers.length === playersPerMission[currentMission]){
+						$proposeMissionButton.disabled = false;
+					}
 				}
 			}
 		};

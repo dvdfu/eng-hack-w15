@@ -18,6 +18,7 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	if(me.name === leader.name){
 		$proposeMissionButton.disabled = true;
 		$proposeMissionButton.style.display = 'inline';
+		inMissionProposal = true;
 	}
 
 	$nameField.style.display = 'none';

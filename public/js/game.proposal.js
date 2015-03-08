@@ -1,4 +1,5 @@
 $proposeMissionButton.onclick = function() {
+	inMissionProposal = false;
 	socket.emit('mission proposed', selectedUsers);
 };
 
