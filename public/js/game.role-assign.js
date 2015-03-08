@@ -1,4 +1,5 @@
 var $rolesButton = document.getElementById('btn-roles');
+var $twoFailsText = document.getElementById('two-fails');
 
 $rolesButton.onclick = function() {
 	showRoles();
@@ -20,6 +21,9 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 		}
 	}
 	twoFailsMissionFour = _twoFailsMissionFour;
+
+	$twoFailsText.style.display = twoFailsMissionFour ? 'block' : 'none';
+
 
 	$missions.style.display = 'block';
 	$gameInfo.style.display = 'block';
