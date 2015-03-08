@@ -1,4 +1,5 @@
 var $rolesButton = document.getElementById('btn-roles');
+$rolesButton.style.display = 'none';
 
 $rolesButton.onclick = function() {
 	// $me.

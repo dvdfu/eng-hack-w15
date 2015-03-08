@@ -9,7 +9,17 @@
 	<body>
 		<div class="container">
 			<input id="input-name" type="text" class="form-control" placeholder="Enter name">
-			<button id="btn-roles" type="button" class="btn btn-default">Roles</button>
+			<div id="list-mission">
+				<div class="mission"></div>
+				<div class="mission"></div>
+				<div class="mission"></div>
+				<div class="mission"></div>
+				<div class="mission"></div>
+			</div>
+			<div id="game-info">
+				<div id="failed-proposals"></div>
+				<button id="btn-roles" type="button" class="btn btn-default">Roles</button>
+			</div>
 			<ul id="list-users" class="list-group"></ul>
 			<button id="btn-start" type="button" class="btn btn-default">Start Game!</button>
 
@@ -41,11 +51,14 @@
 				</ul>
 			</div> -->
 
+			<div id="options"></dov>
+
 		</div>
 		<script src="https://cdn.socket.io/socket.io-1.3.2.js"></script>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript" src="/js/game.js"></script>
 		<script type="text/javascript" src="/js/game.user-join.js"></script>
 		<script type="text/javascript" src="/js/game.role-assign.js"></script>
+		<script type="text/javascript" src="/js/game.mission-proposal.js"></script>
 	</body>
 </html>
