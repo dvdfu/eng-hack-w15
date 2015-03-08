@@ -18,8 +18,24 @@ var $gameInfo= document.getElementById('game-info');
 var $userList = document.getElementById('list-users');
 var $options = document.getElementById('options');
 
+var $acceptButton = document.getElementById('btn-vote-yes');
+var $refuseButton = document.getElementById('btn-vote-no');
+var $succeedButton = document.getElementById('btn-succeed');
+var $failButton = document.getElementById('btn-fail');
+var $proposeMissionButton = document.getElementById('btn-propose-mission');
+
 function missionReset(){
 	$('.user-leader').empty();
 	$('.user').removeClass('selected');
 	selectedUsers.length = 0;
+	hideAllButtons();
+}
+
+function hideAllButtons(){
+	$startButton.style.display = 'none';
+	$acceptButton.style.display = 'none';
+	$refuseButton.style.display = 'none';
+	$proposeMissionButton.style.display = 'none';
+	$failButton.style.display = 'none';
+	$succeedButton.style.display = 'none';
 }
