@@ -9,8 +9,18 @@ var consecutiveFailedProposals = 0;
 var twoFailsMissionFour;
 var leader;
 
+var selectedUsers = [];
+
 var $missions = document.getElementById('list-mission');
-var $failedProposals= document.getElementById('failed-proposals');
+var $gameInfo= document.getElementById('game-info');
+var $userList = document.getElementById('list-users');
+var $options = document.getElementById('options');
 
 $missions.style.display = 'none';
-$failedProposals.style.display = 'none';
+$gameInfo.style.display = 'none';
+
+function missionReset(){
+	$('.user-leader').empty();
+	$('.user').removeClass('selected');
+	selectedUsers.length = 0;
+}

@@ -1,5 +1,3 @@
-
-var $userList = document.getElementById('list-users');
 var $nameField = document.getElementById('input-name');
 var $startButton = document.getElementById('btn-start');
 
@@ -38,9 +36,16 @@ socket.on('users joined', function (_users) {
 		$li.innerHTML = '<div class="user-leader"></div>' + 
 			'<div class="user-name">' + user.name + '</div>' +
 			'<div class="user-vote"></div>';
-		$li.click(function() {
-
-		});
+		$li.onclick = function() {
+			if($li.classList.contains('selected')){
+				$li.classList.remove("selected");
+				var index = selectedUsers.indexOf(user);
+				selectedUsers.splice(index, 1);
+			}else{
+				$li.classList.add("selected");
+				selectedUsers.push(user);
+			}
+		};
 		$userList.appendChild($li);
 	});
 	$startButton.disabled = users.length < 5;

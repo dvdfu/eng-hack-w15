@@ -3,6 +3,8 @@ var app	    = express();
 var http    = require('http').Server(app);
 var io      = require('socket.io')(http);
 
+var MIN_PLAYERS = 5;
+
 var states = {
 	USERS_JOINING: "USERS_JOINING",
 	PROPOSE_MISSION: "PROPOSE_MISSION",
@@ -32,7 +34,6 @@ var currentMission = 1;
 var playersPerMission = [];
 
 // variables for counting how many users have done an action
-var rolesSeen = 0;
 var missionSuccessVotes = 0;
 var missionFailVotes = 0;
 
@@ -46,25 +47,29 @@ function User(name) {
 }
 
 function assignRoles() {
+	console.log(users);
 	var numSpies = Math.floor((users.length - 1) / 3) + 1;
-	users = shuffle(users);
+	var tmp = shuffle(users);
 	for (var i = 0; i < users.length; i++) {
-		if (i < numSpies) users[i].role = 'spy';
-		else users[i].role = 'resistance';
+		users[i].role = 'resistance';
+		for (var j = 0; j < numSpies; j++) {
+			if(tmp[j].id === users[i].id) users[i].role = 'spy';
+		};
 	}
 
 	console.log(users);
 
 	function shuffle(array) {
-		var currentIndex = array.length, temporaryValue, randomIndex;
+		var temp = JSON.parse(JSON.stringify(array));
+		var currentIndex = temp.length, temporaryValue, randomIndex;
 		while (0 !== currentIndex) {
 			randomIndex = Math.floor(Math.random() * currentIndex);
 			currentIndex -= 1;
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
+			temporaryValue = temp[currentIndex];
+			temp[currentIndex] = temp[randomIndex];
+			temp[randomIndex] = temporaryValue;
 		}
-		return array;
+		return temp;
 	}
 }
 
@@ -120,7 +125,7 @@ io.on('connection', function (socket) {
 			var user = new User(name);
 			users.push(user);
 			io.emit('users joined', [user]);
-			if (users.length >= 5) {
+			if (users.length >= MIN_PLAYERS) {
 				io.emit('allow game start');
 			}
 			console.log(name + ' joined the game');
@@ -130,22 +135,16 @@ io.on('connection', function (socket) {
 	socket.on('request role', function (user) {
 		if (state === states.USERS_JOINING && users.length >= 5) {
 			assignRoles();
-			io.emit('assign role', users);
-		}
-	});
-
-	socket.on('role seen', function(){
-		rolesSeen++;
-		if(rolesSeen === users.length){
 			state = states.PROPOSE_MISSION;
 			leaderIndex = Math.floor(Math.random() * users.length);
+			console.log(users[leaderIndex].name + ' is the initial leader');
 			initializeMissions();
 			io.emit('start game',
+				users,
 				users[leaderIndex],
 				playersPerMission,
-				users.length >= 7 // are two fails required for mission 4
+				users.length >= 7 // are two fails required for mission 4);
 			);
-			rolesSeen = 0;
 		}
 	});
 
