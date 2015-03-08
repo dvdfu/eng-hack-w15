@@ -136,35 +136,35 @@ io.on('connection', function (socket) {
 		playersOnMission = usersOnMission; // not used if vote fails
 		console.log(playersOnMission);
 		state = states.MISSION_VOTE;
+		proposalVotes.length = 0;
 		io.emit('mission proposed', usersOnMission);
 	});
 
 	socket.on('sent proposal vote', function(user, userAgrees){
 		proposalVotes[user.id] = userAgrees;
-		if(proposalVotes.length === users.length){
+		if(Object.keys(proposalVotes).length === users.length){
+			console.log(users);
 			var agreed = 0;
 			var reject = 0;
-			for (var i = 0; i < proposalVotes.length; i++) {
-				if(proposalVotes[i]){
-					agreed++;
-				}else{
-					reject++;
-				}
-			};
 
-			// reset array
-			proposalVotes.length = 0;
+			proposalVotes.forEach(function (vote){
+				if(vote) agreed++;
+				else reject++;
+			});
 
 			if(agreed > reject){
 				// mission passes and mission vote begins
 				state = states.MISSION_VOTE;
 				consecutiveFailedProposals = 0;
+				console.log(proposalVotes);
 				io.emit('proposal passed', proposalVotes, playersOnMission);
 			}else{
+				console.log("Proposal failed!");
 				// mission fails and leader changes
 				state = states.PROPOSE_MISSION;
 				changeLeader();
 				consecutiveFailedProposals++;
+				console.log(proposalVotes);
 				if(consecutiveFailedProposals === 5){
 					// resistanceWins: false, successVotes: null, failVotes: null
 					io.emit('game over', false, null, null);
@@ -172,10 +172,13 @@ io.on('connection', function (socket) {
 					io.emit('proposal rejected', proposalVotes, users[leaderIndex], consecutiveFailedProposals);
 				}
 			}
+			// reset array
+			proposalVotes.length = 0;
 		}
 	});
 
 	socket.on('sent mission vote', function(user, missionSuccess){
+		playersOnMission.length = 0;
 		if(missionSuccess){
 			missionSuccessVotes++;
 		}else{
@@ -198,7 +201,7 @@ io.on('connection', function (socket) {
 				io.emit('game over', true, missionSuccessVotes, missionFailVotes);
 			}else{
 				changeLeader();
-				io.emit('mission end', failed, currentMission, users[leaderIndex]);
+				io.emit('mission end', failed, missionSuccessVotes, missionFailVotes, currentMission, users[leaderIndex]);
 			}
 			missionSuccessVotes = 0;
 			missionFailVotes = 0;

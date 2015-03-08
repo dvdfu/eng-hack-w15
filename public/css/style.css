@@ -84,7 +84,14 @@ body {
 
 .user-vote {
 	height: 20px;
+	background-color: #DDD;
+}
+
+.user-vote.accepted{
 	background-color: #8f8;
+}
+.user-vote.rejected{
+	background-color: #f00;
 }
 
 .user.selected {
