@@ -5,7 +5,6 @@ var io      = require('socket.io')(http);
 
 var states = {
 	USERS_JOINING: "USERS_JOINING",
-	ROLE_ASSIGNMENT: "ROLE_ASSIGNMENT",
 	PROPOSE_MISSION: "PROPOSE_MISSION",
 	PROPOSAL_VOTE: "PROPOSAL_VOTE",
 	MISSION_VOTE: "MISSION_VOTE",
@@ -130,7 +129,6 @@ io.on('connection', function (socket) {
 
 	socket.on('request role', function (user) {
 		if (state === states.USERS_JOINING && users.length >= 5) {
-			state = states.ROLE_ASSIGNMENT;
 			assignRoles();
 			io.emit('assign role', users);
 		}
