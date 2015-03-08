@@ -32,6 +32,8 @@ function missionReset(){
 	$('.user').removeClass('selected');
 	selectedUsers.length = 0;
 	hideAllButtons();
+
+	// TO DO: set top UI stuff
 }
 
 function hideAllButtons(){
@@ -41,4 +43,24 @@ function hideAllButtons(){
 	$proposeMissionButton.style.display = 'none';
 	$failButton.style.display = 'none';
 	$succeedButton.style.display = 'none';
+}
+
+function setLeaderDisplay(){
+	var $leaderView = getUserListItem(leader);
+	$leaderView.find(".user-leader").html( '<i class="fa fa-star"></i>' ); // David pls change dis
+
+	if(me.name === leader.name){
+		$proposeMissionButton.disabled = true;
+		$proposeMissionButton.style.display = 'inline';
+		inMissionProposal = true;
+	}
+}
+
+function getUserListItem(user){
+	return $('.user:nth-child(' + (user.id + 1) + ')');
+}
+
+function hideAllVotes(){
+	$('.user-vote').removeClass('accepted');
+	$('.user-vote').removeClass('rejected');
 }

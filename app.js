@@ -141,7 +141,7 @@ io.on('connection', function (socket) {
 	});
 
 	socket.on('sent proposal vote', function(user, userAgrees){
-		proposalVotes[user.name] = userAgrees;
+		proposalVotes[user.id] = userAgrees;
 		if(proposalVotes.length === users.length){
 			var agreed = 0;
 			var reject = 0;
@@ -170,7 +170,7 @@ io.on('connection', function (socket) {
 					// resistanceWins: false, successVotes: null, failVotes: null
 					io.emit('game over', false, null, null);
 				}else{
-					io.emit('proposal rejected', proposalVotes, users[leaderIndex]);
+					io.emit('proposal rejected', proposalVotes, users[leaderIndex], consecutiveFailedProposals);
 				}
 			}
 		}
