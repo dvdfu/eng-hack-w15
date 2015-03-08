@@ -1,7 +1,7 @@
 var $rolesButton = document.getElementById('btn-roles');
 
 $rolesButton.onclick = function() {
-	// $me.
+	showRoles();
 };
 
 socket.on('start game', function (_users, _leader, _playersPerMission, _twoFailsMissionFour) {
@@ -22,20 +22,34 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	$nameField.style.display = 'none';
 	$startButton.style.display = 'none';
 	$gameInfo.style.display = 'block';
+
 	_users.forEach(function (user) {
 		var $currentUser = $('.user:nth-child(' + (user.id + 1) + ')');
 		if (user.name === me.name) {
 			me = user;
 			$me = $currentUser;
-			$me.css( "background-color", "#ff0" );
 		}
 		if (user.role === 'spy') {
 			$spies.push($currentUser);
 		}
 	});
+
+	showRoles();
+});
+
+function showRoles() {
+	$me.addClass('user-self');
 	if (me.role === 'spy') {
 		$spies.forEach(function ($spy) {
-			$spy.css( "border", "5px solid red" );
-		})
+			$spy.addClass('user-spy');
+		});
 	}
-});
+	setTimeout(hideRoles, 1000);
+
+	function hideRoles() {
+		$me.removeClass('user-self');
+		$spies.forEach(function ($spy) {
+			$spy.removeClass('user-spy');
+		});
+	}
+}

@@ -10,10 +10,6 @@ body {
 	margin: 15px 0 0 0;
 }
 
-.btn {
-	box-shadow: 0 5px 0 #888;
-}
-
 .sub-container {
 	margin-top: 15px;
 }
@@ -60,8 +56,20 @@ body {
 	float: left;
 }
 
+#list-users {
+	margin-bottom: 0;
+}
+
 .user {
 	height: 40px;
+}
+
+.user-self {
+	background-color: #acf;
+}
+
+.user-spy {
+	border: 1px solid red;
 }
 
 .user-vote {
