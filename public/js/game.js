@@ -59,7 +59,7 @@ function showInstruction(text, textFadeout) {
 
 function setLeaderDisplay(){
 	var $leaderView = getUserListItem(leader);
-	$leaderView.find(".user-leader").html('&#9818;');
+	$leaderView.find(".user-leader").html('<i class="fa fa-star"></i>');
 
 	if(me.name === leader.name){
 		$proposeMissionButton.disabled = true;
