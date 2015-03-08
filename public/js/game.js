@@ -14,6 +14,9 @@ var inMissionProposal = false;
 
 var selectedUsers = [];
 
+var $mainPage = document.getElementById('main-page');
+var $gameInProgress = document.getElementById('game-in-progress');
+
 var $failedProposals = document.getElementById('failed-proposals');
 var $missions = document.getElementById('list-mission');
 var $gameInfo= document.getElementById('game-info');
@@ -79,3 +82,10 @@ function setProposalFails(count) {
 	consecutiveFailedProposals = count;
 	$failedProposals.innerHTML = 'Failed votes: <b>' + consecutiveFailedProposals + '/5</b>';
 }
+
+socket.on('state', function(state){
+	if(state !== "USERS_JOINING"){
+		$mainPage.style.display = 'none';
+		$gameInProgress.style.display = 'block';
+	}
+});
