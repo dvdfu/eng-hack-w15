@@ -9,36 +9,41 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="row">
-				<input id="input-name" type="text" class="form-control" placeholder="Enter name">
-				<div id="game-info">
-					<div class="row" id="list-mission">
-						<div class="mission"></div>
-						<div class="mission"></div>
-						<div class="mission"></div>
-						<div class="mission"></div>
-						<div class="mission"></div>
-					</div>
-					<div class="row">
-						<div class="col-xs-6" id="failed-proposals"></div>
-						<div class="col-xs-6">
-							<button id="btn-roles" type="button" class="btn btn-default">Roles</button>
+			<div id="game-in-progress" class="jumbotron">
+				<p>Hold up, dude! There's a game in progress.</p>
+			</div>
+			<div id="main-page">
+				<div class="row">
+					<input id="input-name" type="text" class="form-control" placeholder="Enter name">
+					<div id="game-info">
+						<div class="row" id="list-mission">
+							<div class="mission"></div>
+							<div class="mission"></div>
+							<div class="mission"></div>
+							<div class="mission"></div>
+							<div class="mission"></div>
+						</div>
+						<div class="row">
+							<div class="col-xs-6" id="failed-proposals"></div>
+							<div class="col-xs-6">
+								<button id="btn-roles" type="button" class="btn btn-default">Roles</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<ul id="list-users" class="list-group"></ul>
-				<div id="instructions"></div>
-			</div>
-			<div class="row">
-				<div id="options">
-					<button id="btn-start" type="button" class="btn btn-default">Start Game!</button>
-					<button id="btn-propose-mission" type="button" class="btn btn-primary">Propose Mission</button>
-					<button id="btn-vote-yes" type="button" class="btn btn-primary">Accept</button>
-					<button id="btn-vote-no" type="button" class="btn btn-primary">Refuse</button>
-					<button id="btn-succeed" type="button" class="btn btn-primary">Succeed</button>
-					<button id="btn-fail" type="button" class="btn btn-primary">Fail</button>
+				<div class="row">
+					<ul id="list-users" class="list-group"></ul>
+					<div id="instructions"></div>
+				</div>
+				<div class="row">
+					<div id="options">
+						<button id="btn-start" type="button" class="btn btn-default">Start Game!</button>
+						<button id="btn-propose-mission" type="button" class="btn btn-primary">Propose Mission</button>
+						<button id="btn-vote-yes" type="button" class="btn btn-primary">Accept</button>
+						<button id="btn-vote-no" type="button" class="btn btn-primary">Refuse</button>
+						<button id="btn-succeed" type="button" class="btn btn-primary">Succeed</button>
+						<button id="btn-fail" type="button" class="btn btn-primary">Fail</button>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -55,6 +55,7 @@ socket.on('proposal passed', function(proposalVotes, playersOnMission){
 	hideAllButtons();
 	playersOnMission.forEach(function(player){
 		if(me.id === player.id){
+			if(me.role === 'resistance') $failButton.disabled = true;
 			$failButton.style.display = 'inline';
 			$succeedButton.style.display = 'inline';
 		}
