@@ -26,6 +26,7 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	$startButton.style.display = 'none';
 	$gameInfo.style.display = 'block';
 
+	users = _users;
 	_users.forEach(function (user) {
 		var $currentUser = getUserListItem(user);
 		if (user.name === me.name) {
@@ -46,7 +47,9 @@ function showRoles() {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
 		});
-		showInstruction('You\'re a spy!');
+		showInstruction('You\'re a <b>spy</b>!');
+	} else {
+		showInstruction('You\'re a <b>resistance member</b>!');
 	}
 	setTimeout(hideRoles, 1000);
 

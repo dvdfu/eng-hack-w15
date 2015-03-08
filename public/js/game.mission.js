@@ -35,5 +35,28 @@ socket.on('mission end', function(failed, missionSuccessVotes, missionFailVotes,
 });
 
 socket.on('game over', function(resistanceWins, missionSuccessVotes, missionFailVotes){
-// also david's job??
+	$mainPage.style.display = 'none';
+	$gameFinish.style.display = 'block';
+	var winningTeam = [];
+	if (resistanceWins) {
+		$gameFinish.innerHTML = '<h3>The Resistance win the game!</h3>';
+		users.forEach(function (user) {
+			if (user.role === 'resistance') winningTeam.push(user.name);
+		});
+	} else {
+		$gameFinish.innerHTML = '<h3>The Spies win the game!</h3>';
+		users.forEach(function (user) {
+			if (user.role === 'spy') winningTeam.push(user.name);
+		});
+	}
+
+	$gameFinish.innerHTML += '<ul>';
+	winningTeam.forEach(function (username) {
+		$gameFinish.innerHTML += '<li>' + username + '</li>';
+	});
+	$gameFinish.innerHTML += '</ul>';
+
+	setTimeout(function () {
+		socket.emit('reset');
+	}, 8000);
 });

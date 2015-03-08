@@ -2,8 +2,12 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
-#game-info, #btn-propose-mission, #game-in-progress, #btn-vote-yes, #btn-vote-no, #btn-succeed, #btn-fail {
+#game-info, #btn-propose-mission, #game-in-progress, #game-finish, #btn-vote-yes, #btn-vote-no, #btn-succeed, #btn-fail {
 	display: none;
+}
+
+#game-finish li {
+	display: block;
 }
 
 .container {

@@ -16,6 +16,7 @@ var selectedUsers = [];
 
 var $mainPage = document.getElementById('main-page');
 var $gameInProgress = document.getElementById('game-in-progress');
+var $gameFinish = document.getElementById('game-finish');
 
 var $failedProposals = document.getElementById('failed-proposals');
 var $missions = document.getElementById('list-mission');
@@ -50,7 +51,7 @@ function hideAllButtons(){
 	$succeedButton.style.display = 'none';
 }
 
-function showInstruction(text) {
+function showInstruction(text, textFadeout) {
 	$instructions.innerHTML = text;
 	$instructions.classList.add('highlight');
 	setTimeout(function() {
