@@ -42,6 +42,7 @@ function showRoles() {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
 		});
+		showInstruction('You\'re a spy!');
 	}
 	setTimeout(hideRoles, 1000);
 
