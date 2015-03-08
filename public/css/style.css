@@ -65,7 +65,7 @@ body {
 
 .user {
 	height: 40px;
-	transition: background-color 0.5s;
+	transition: background-color 0.25s;
 }
 
 .user-self {
@@ -80,6 +80,10 @@ body {
 .user-vote {
 	height: 20px;
 	background-color: #8f8;
+}
+
+.user.selected {
+	background-color: #ddd;
 }
 
 .fa {

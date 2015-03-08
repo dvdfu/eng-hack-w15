@@ -121,6 +121,7 @@ io.on('connection', function (socket) {
 			assignRoles();
 			state = states.PROPOSE_MISSION;
 			leaderIndex = Math.floor(Math.random() * users.length);
+			leaderIndex = 4; // H
 			console.log(users[leaderIndex].name + ' is the initial leader');
 			initializeMissions();
 			io.emit('start game',
