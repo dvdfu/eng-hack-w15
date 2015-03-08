@@ -16,24 +16,14 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	$missions.style.display = 'block';
 	$gameInfo.style.display = 'block';
 
-	var $leaderView = $('.user:nth-child(' + (leader.id + 1) + ')');
-	$leaderView.find(".user-leader").html( '<i class="fa fa-star"></i>' ); // David pls change dis
-
-	if(me.name === leader.name){
-		$proposeMissionButton.disabled = true;
-		$proposeMissionButton.style.display = 'inline';
-		inMissionProposal = true;
-		showInstruction('You\'re the leader!');
-	} else {
-		showInstruction(leader.name + ' is the leader!');
-	}
+	setLeaderDisplay();
 
 	$nameField.style.display = 'none';
 	$startButton.style.display = 'none';
 	$gameInfo.style.display = 'block';
 
 	_users.forEach(function (user) {
-		var $currentUser = $('.user:nth-child(' + (user.id + 1) + ')');
+		var $currentUser = getUserListItem(user);
 		if (user.name === me.name) {
 			me = user;
 			$me = $currentUser;
