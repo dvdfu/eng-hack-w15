@@ -7,6 +7,10 @@ $rolesButton.onclick = function() {
 socket.on('start game', function (_users, _leader, _playersPerMission, _twoFailsMissionFour) {
 	leader = _leader;
 	playersPerMission = _playersPerMission;
+	for (var i = 0; i < playersPerMission.length; i++) {
+		var mission = $('.mission:nth-child(' + (i + 1) + ')');
+		mission.html(playersPerMission[i]);
+	}
 	twoFailsMissionFour = _twoFailsMissionFour;
 
 	$missions.style.display = 'block';
@@ -19,6 +23,9 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 		$proposeMissionButton.disabled = true;
 		$proposeMissionButton.style.display = 'inline';
 		inMissionProposal = true;
+		showInstruction('You\'re the leader!');
+	} else {
+		showInstruction(leader.name + ' is the leader!');
 	}
 
 	$nameField.style.display = 'none';
