@@ -29,7 +29,7 @@ $nameField.onkeypress = function(e) {
 }
 
 $startButton.onclick = function() {
-	socket.emit('start game');
+	socket.emit('request role');
 	$startButton.disabled = true;
 };
 
