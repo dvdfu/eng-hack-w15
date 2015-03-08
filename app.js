@@ -37,6 +37,9 @@ var rolesSeen = 0;
 var missionSuccessVotes = 0;
 var missionFailVotes = 0;
 
+var pointsResistance = 0;
+var pointsSpy = 0;
+
 function User(name) {
 	this.name = name;
 	this.id = currId;
@@ -94,6 +97,14 @@ function initializeMissions(){
 	}
 }
 
+function areTwoFailsRequired(){
+	return users.length > 6 && currentMission === 4;
+}
+
+function changeLeader(){
+	leaderIndex = (leaderIndex + 1) % users.length;
+}
+
 app.get('/', function (req, res) {
 	res.sendFile(__dirname + '/public/index.html');
 });
@@ -131,15 +142,10 @@ io.on('connection', function (socket) {
 			state = states.PROPOSE_MISSION;
 			leaderIndex = Math.floor(Math.random() * users.length);
 			initializeMissions();
-
-			var twoFailsRequired = false;
-			if(users.length > 6 && currentMission === 4){
-				twoFailsRequired = true;
-			}
-
 			io.emit('start game',
 				users[leaderIndex],
-				playersPerMission
+				playersPerMission,
+				users.length >= 7 // are two fails required for mission 4
 			);
 			rolesSeen = 0;
 		}
@@ -175,11 +181,11 @@ io.on('connection', function (socket) {
 			}else{
 				// mission fails and leader changes
 				state = states.PROPOSE_MISSION;
-				leaderIndex = (leaderIndex + 1) % users.length;
+				changeLeader();
 				consecutiveFailedProposals++;
 				if(consecutiveFailedProposals === 5){
-					// resistanceWins: false
-					io.emit('game over', false);
+					// resistanceWins: false, successVotes: null, failVotes: null
+					io.emit('game over', false, null, null);
 				}else{
 					io.emit('proposal rejected', proposalVotes, users[leaderIndex]);
 				}
@@ -195,9 +201,28 @@ io.on('connection', function (socket) {
 		}
 
 		if(missionSuccessVotes + missionFailVotes === playersPerMission[currentMission]){
+			var failed = areTwoFailsRequired() ? (missionFailVotes > 1) : (missionFailVotes > 0);
+			currentMission++;
 
+			if(failed){
+				pointsSpy++;
+			}else{
+				pointsResistance++;
+			}
+
+			if(pointsSpy === 3){
+				io.emit('game over', false, missionSuccessVotes, missionFailVotes);
+			}else if(pointsResistance === 3){
+				io.emit('game over', true, missionSuccessVotes, missionFailVotes);
+			}else{
+				changeLeader();
+				io.emit('mission end', failed, currentMission, users[leaderIndex]);
+			}
+			missionSuccessVotes = 0;
+			missionFailVotes = 0;
 		}
 	});
+	
 });
 
 http.listen(process.env.PORT || 3000, function () {
