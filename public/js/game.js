@@ -43,7 +43,7 @@ nameButton.onclick = function() {
 	submitName(nameField.value);
 };
 startButton.onclick = function(){
-	socket.emit('start game');
+	socket.emit('request role');
 	startButton.disabled = true;
 };
 
