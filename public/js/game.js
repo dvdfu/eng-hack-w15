@@ -103,3 +103,7 @@ socket.on('state', function(state){
 socket.on('refresh view', function() {
 	window.location.reload();
 });
+
+socket.on('user disconnected', function(name) {
+	socket.emit('TEST', name);
+});

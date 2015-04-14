@@ -92,9 +92,16 @@ app.get('/', function (req, res) {
 app.use(express.static(__dirname + '/public'));
 
 io.on('connection', function (socket) {
+
 	socket.emit('state', state);
 	socket.emit('users joined', users);
 
+	socket.on('disconnect', function() {
+		io.emit('user disconnected', this.name);
+	});
+	socket.on('TEST', function (name){
+		console.log(name + ' disconnected!');
+	});
 
 	socket.on('add user', function (name) {
 		if(users.length < 10 && state === states.USERS_JOINING){

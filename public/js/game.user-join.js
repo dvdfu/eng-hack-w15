@@ -1,6 +1,28 @@
 var $nameField = document.getElementById('input-name');
+var $nameInputGroup = document.getElementById('name-input-group');
 var $userList = document.getElementById('list-users');
 var $startButton = document.getElementById('btn-start');
+var $nameSubmit = document.getElementById('submit-name');
+
+function submitName(name) {
+	var nameTaken = false;
+	users.forEach(function (user) {
+		if (name == user.name) nameTaken = true;
+	});
+
+	if (name.length > 0){
+		if (!nameTaken) {
+			me.name = name;
+			socket.emit('add user', name);
+			$nameField.disabled = true;
+			$nameSubmit.disabled = true;
+		} else {
+			showInstruction(name + ' has already been taken!');
+		}
+	} else {
+		showInstruction('Enter a name!');
+	}
+}
 
 $nameField.onkeypress = function(e) {
 	if (!e) e = window.event;
@@ -8,26 +30,11 @@ $nameField.onkeypress = function(e) {
     if (keyCode == '13'){
     	submitName($nameField.value);
     }
-
-    function submitName(name) {
-		var nameTaken = false;
-		users.forEach(function (user) {
-			if (name == user.name) nameTaken = true;
-		});
-
-		if (name.length > 0){
-			if (!nameTaken) {
-				me.name = name;
-				socket.emit('add user', name);
-				$nameField.disabled = true;
-			} else {
-				showInstruction(name + ' has already been taken!');
-			}
-		} else {
-			showInstruction('Enter a name!');
-		}
-	}
 }
+
+$nameSubmit.onclick = function() {
+	submitName($nameField.value);
+};
 
 $startButton.onclick = function() {
 	socket.emit('request role');
