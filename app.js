@@ -32,6 +32,8 @@ var missionFailVotes = 0;
 var pointsResistance = 0;
 var pointsSpy = 0;
 
+var myName;
+
 function User(name) {
 	this.name = name;
 	this.id = currId;
@@ -97,15 +99,14 @@ io.on('connection', function (socket) {
 	socket.emit('users joined', users);
 
 	socket.on('disconnect', function() {
-		io.emit('user disconnected', this.name);
-	});
-	socket.on('TEST', function (name){
-		console.log(name + ' disconnected!');
+		io.emit('player disconnect', myName);
+		console.log(myName + ' disconnected!');
 	});
 
 	socket.on('add user', function (name) {
 		if(users.length < 10 && state === states.USERS_JOINING){
 			var user = new User(name);
+			myName = name;
 			users.push(user);
 			io.emit('users joined', [user]);
 			if (users.length >= MIN_PLAYERS) {

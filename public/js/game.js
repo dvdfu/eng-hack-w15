@@ -2,6 +2,7 @@ var socket = io();
 var users = [];
 var me = {};
 var $me, $spies = [];
+var disconnectedUsersNames = [];
 
 // data to display
 var playersPerMission = [];
@@ -104,6 +105,6 @@ socket.on('refresh view', function() {
 	window.location.reload();
 });
 
-socket.on('user disconnected', function(name) {
-	socket.emit('TEST', name);
+socket.on('player disconnect', function(name) {
+	disconnectedUsersNames.push(name);
 });
