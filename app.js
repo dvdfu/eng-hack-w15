@@ -32,11 +32,10 @@ var missionFailVotes = 0;
 var pointsResistance = 0;
 var pointsSpy = 0;
 
-var myName;
-
-function User(name) {
+function User(name, connectionId) {
 	this.name = name;
 	this.id = currId;
+	this.connectionId = connectionId;
 	currId++;
 }
 
@@ -99,20 +98,20 @@ io.on('connection', function (socket) {
 	socket.emit('users joined', users);
 
 	socket.on('disconnect', function() {
-		io.emit('player disconnect', myName);
-		console.log(myName + ' disconnected!');
+		//TODO: check state, just remove player if game hasn't started
+		io.emit('player disconnect', socket.id);
+		console.log(socket.id + ' disconnected!');
 	});
 
 	socket.on('add user', function (name) {
 		if(users.length < 10 && state === states.USERS_JOINING){
-			var user = new User(name);
-			myName = name;
+			var user = new User(name, socket.id);
 			users.push(user);
 			io.emit('users joined', [user]);
 			if (users.length >= MIN_PLAYERS) {
 				io.emit('allow game start');
 			}
-			console.log(name + ' joined the game');
+			console.log(name + ' joined the game + (socket ID: ' + socket.id + ')');
 		}
 	});
 

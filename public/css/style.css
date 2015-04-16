@@ -3,7 +3,7 @@ body {
 	background-color: #222;
 }
 
-#game-info, #btn-propose-mission, #game-in-progress, #game-finish, #btn-vote-yes, #btn-vote-no, #btn-succeed, #btn-fail {
+#game-info, #btn-propose-mission, #game-in-progress, #game-finish, #btn-vote-yes, #btn-vote-no, #btn-succeed, #btn-fail, #disconnected-players {
 	display: none;
 }
 

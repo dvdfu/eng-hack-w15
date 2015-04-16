@@ -22,7 +22,7 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 	}
 	twoFailsMissionFour = _twoFailsMissionFour;
 	$twoFailsText.style.display = twoFailsMissionFour ? 'block' : 'none';
-	$nameField.style.display = 'none';
+	$nameInputGroup.style.display = 'none';
 	$startButton.style.display = 'none';
 	$gameInfo.style.display = 'block';
 	$missions.style.display = 'block';
@@ -46,6 +46,7 @@ socket.on('start game', function (_users, _leader, _playersPerMission, _twoFails
 });
 
 function showRoles() {
+	$rolesButton.disabled = true;
 	if (me.role === 'spy') {
 		$spies.forEach(function ($spy) {
 			$spy.addClass('user-spy');
@@ -59,6 +60,7 @@ function showRoles() {
 	function hideRoles() {
 		$spies.forEach(function ($spy) {
 			$spy.removeClass('user-spy');
+			$rolesButton.disabled = false;
 		});
 	}
 }

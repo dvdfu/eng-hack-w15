@@ -2,7 +2,7 @@ var socket = io();
 var users = [];
 var me = {};
 var $me, $spies = [];
-var disconnectedUsersNames = [];
+var disconnectedUsers = [];
 
 // data to display
 var playersPerMission = [];
@@ -18,6 +18,9 @@ var selectedUsers = [];
 var $mainPage = document.getElementById('main-page');
 var $gameInProgress = document.getElementById('game-in-progress');
 var $gameFinish = document.getElementById('game-finish');
+
+var $disconnected = document.getElementById('disconnected-players');
+var $disconnectedList = document.getElementById('list-disconnected');
 
 var $failedProposals = document.getElementById('failed-proposals');
 var $missions = document.getElementById('list-mission');
@@ -94,10 +97,29 @@ function setProposalFails(count) {
 	$failedProposals.innerHTML = 'Failed votes: <b>' + consecutiveFailedProposals + '/5</b>';
 }
 
+function populateDisconnectedList(){
+	disconnectedUsers.foreach(function(user){
+		var $li = document.createElement('li');
+		$li.className = 'list-group-item user';
+		$li.innerHTML = '<div class="col-xs-12 user-name">' + user.name + '</div>';
+		$li.onclick = function() {
+			// TO DO: Emit reconnect, set up socket to take role of the player
+			disconnectedUsers.splice(disconnectedUsers.indexOf(user), 1);
+			$mainPage.style.display = 'block';
+			$gameInProgress.style.display = 'none';
+		};
+		$userList.appendChild($li);
+	});
+}
+
 socket.on('state', function(state){
 	if(state !== "USERS_JOINING"){
 		$mainPage.style.display = 'none';
 		$gameInProgress.style.display = 'block';
+		if(disconnectedUsers.length > 0){
+			populateDisconnectedList();
+			$disconnected.style.display = 'block';
+		}
 	}
 });
 
@@ -105,6 +127,10 @@ socket.on('refresh view', function() {
 	window.location.reload();
 });
 
-socket.on('player disconnect', function(name) {
-	disconnectedUsersNames.push(name);
+socket.on('player disconnect', function(socketId) {
+	users.foreach(function(user){
+		if(user.connectionId == socketId){
+			disconnectedUsers.push(user);
+		}
+	});
 });
